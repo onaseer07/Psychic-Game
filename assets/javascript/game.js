@@ -9,7 +9,7 @@ let wins = 0;
 let losses = 0;
 let guessedList = [ ];
 
-alert("Computer picked " + " ' " + computerChoices + " ' ");
+alert("Guess what letter am I thinking?");
 
 
 document.getElementById("losses").innerHTML = "Total Losses: " + losses;
