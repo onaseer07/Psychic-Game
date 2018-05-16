@@ -7,7 +7,6 @@
     let guessedList = [ ];
     let computerChoices = letterChoices[Math.floor(Math.random()*letterChoices.length)];;
     let lives = 9;
-    alert("My initial choice is: " + computerChoices);
             document.onkeyup = function (event) {
             let userGuess = event.key.toLowerCase();
             if (letterChoices.indexOf(userGuess) > -1) {
