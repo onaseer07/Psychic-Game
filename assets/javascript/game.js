@@ -1,63 +1,42 @@
 
-//Start
-//Computer selects a random alphabet;
-function startGame() {
-let letterChoices = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z",];
-let computerChoices = letterChoices[Math.floor(Math.random()*letterChoices.length)];
-let lives = 9;
-let wins = 0;
-let losses = 0;
-let guessedList = [ ];
+    let letterChoices = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j",
+                        "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", 
+                        "u", "v", "w", "x", "y", "z",];
+    let wins = 0;
+    let losses = 0;
+    let guessedList = [ ];
+    let computerChoices = letterChoices[Math.floor(Math.random()*letterChoices.length)];;
+    let lives = 9;
+    alert("My initial choice is: " + computerChoices);
+            document.onkeyup = function (event) {
+            let userGuess = event.key.toLowerCase();
+            if (letterChoices.indexOf(userGuess) > -1) {
+                
+                if (userGuess === computerChoices) {
+                    wins++;
+                    lives = 9;
+                    guessedList = [];
+                    computerChoices = letterChoices[Math.floor(Math.random()*letterChoices.length)];;
+                    alert(computerChoices);
+                } else if (userGuess !== computerChoices) {
+                    lives--;
+                    guessedList.push(userGuess);
+                    if (lives === 0) {
+                        losses++;
+                        lives = 9;
+                        guessedList = [];
+                        computerChoices = letterChoices[Math.floor(Math.random()*letterChoices.length)];
+                    } 
+                }   
 
-alert("Guess what letter am I thinking?");
+			var html = 
+			"<h1> The Psychic Game </h1>" +
+			"<p>Guess what letter I'm thinking of!</p>" +
+			"<p>Wins: " + wins + "</p>" +
+			"<p>Losses: " + losses + "</p>" +
+			"<p>Lives Left: " + lives + "</p>" +
+			"<p>Your Guesses so far: " + guessedList.join(", ") + "</p>";
 
-
-document.getElementById("losses").innerHTML = "Total Losses: " + losses;
-document.getElementById("lives").innerHTML = "Total Lives Left: " + lives;
-
-
-    do {
-        
-        document.onkeyup = function (event) {
-            let userGuess = event.key;
-        if (letterChoices.indexOf(userGuess) > -1) {
-            guessedList.push(userGuess);
-            document.getElementById("lettersGuessed").innerHTML = "Letter Guessed: [ " + guessedList + " ]";
-        
-            if (userGuess == computerChoices) {
-                wins++;  
-                document.getElementById("win").innerHTML = "Total Wins: " + wins;
-                let restartQuestion = confirm("PLAY AGAIN?");
-                if(restartQuestion == true) {
-                location.reload();
-                } else if (restartQuestion == false) {
-                alert("YOU MAY 'X' THIS WINDOW!");
-                }
-            } else if (userGuess !== computerChoices) {
-                lives--;
-                alert("Total Lives: " + lives);
-                if (lives == 0) {
-                    alert("GAMEOVER");
-                    let restartQuestion = confirm("PLAY AGAIN?");
-                    if(restartQuestion == true) {
-                    location.reload();
-                    } else if (restartQuestion == false) {
-                    alert("YOU MAY 'X' THIS WINDOW!");
-                    }
-                }
+            document.querySelector("#scoreboard").innerHTML = html;
             }
         }
-    }; 
-    }while (lives == 0);
-}
-
-
-
-/*/if the userguessed letter matches computer's selected alphabet then user wins else the lives go down by 1 out 8.;
-
-//when live is less than 9 the game is over and the user is lost;
-
-//display guessed letters;
-//display lives left counter;
-//display # of wins:;
-//display # of losses:*/
